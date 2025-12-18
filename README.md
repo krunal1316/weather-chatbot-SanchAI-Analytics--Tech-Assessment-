@@ -10,6 +10,21 @@ A minimal weather application with React frontend and FastAPI backend, using Lan
 - Weather tool that fetches real-time weather data
 - Natural language processing - ask questions like "What's the weather in Pune?" or "weather of pune today?"
 
+##Screenshots
+<img width="1920" height="989" alt="Screenshot (39)" src="https://github.com/user-attachments/assets/56da273c-22ea-465f-8826-3856e66719c6" />
+
+<img width="1920" height="985" alt="Screenshot (44)" src="https://github.com/user-attachments/assets/0576de70-0940-4727-82c1-5415a289927b" />
+
+<img width="1920" height="1031" alt="Screenshot (41)" src="https://github.com/user-attachments/assets/372b0cec-7195-4e87-ae15-0361190a46d4" />
+
+<img width="1920" height="1034" alt="Screenshot (42)" src="https://github.com/user-attachments/assets/d97b0610-6eac-41eb-8c4e-c6ab6297d5a8" />
+
+<img width="1920" height="980" alt="Screenshot (43)" src="https://github.com/user-attachments/assets/43c6959f-be92-4d27-87de-1d55740bf7b9" />
+
+
+
+
+
 ## Project Structure
 
 ```
