@@ -12,7 +12,7 @@ load_dotenv()
 
 app = FastAPI()
 
-# CORS middleware to allow frontend requests
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://localhost:5173"],
@@ -21,11 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize OpenAI-compatible LLM using OpenRouter
-# OpenRouter uses an OpenAI-compatible API, so we configure ChatOpenAI with
-# the OpenRouter endpoint. We also:
-# - use a cheaper model (gpt-4o-mini) via OpenRouter
-# - cap max_tokens so free credits are usually enough
+
 openrouter_key = os.getenv("OPENROUTER_API_KEY")
 if not openrouter_key:
     print("WARNING: OPENROUTER_API_KEY not found in environment variables!")
@@ -41,7 +37,7 @@ llm = ChatOpenAI(
 
 
 def get_weather(city: str) -> str:
-    """Get the current weather for a city using OpenWeatherMap API."""
+    
     api_key = os.getenv("OPENWEATHER_API_KEY")
     if not api_key:
         return "Weather API key not configured. Please set OPENWEATHER_API_KEY in your .env file."
@@ -73,14 +69,14 @@ def get_weather(city: str) -> str:
         return f"Error fetching weather data: {str(e)}"
 
 
-# Create the weather tool
+
 weather_tool = Tool(
     name="get_weather",
     func=get_weather,
     description="Get the current weather for a city. Input should be the city name as a string."
 )
 
-# Create the agent using the new API
+
 tools = [weather_tool]
 system_prompt = "You are a helpful assistant that can answer questions about weather. When asked about weather, use the get_weather tool to fetch current weather information."
 
@@ -106,20 +102,13 @@ async def root():
 
 @app.post("/query", response_model=QueryResponse)
 async def process_query(request: QueryRequest):
-    """Process user query using Langchain agent."""
+
     try:
-        # Bug fix: Use ainvoke for async execution instead of blocking invoke
-        # The new create_agent returns a graph that can be invoked
-        # The input format for the new API uses messages with role/content structure
         from langchain_core.messages import HumanMessage
         
         result = await agent.ainvoke({"messages": [HumanMessage(content=request.message)]})
-        
-        # Extract the response from the result
-        # The result from create_agent contains messages list
         if isinstance(result, dict) and "messages" in result:
             messages = result["messages"]
-            # Get the last assistant message
             for msg in reversed(messages):
                 if hasattr(msg, 'content') and msg.content:
                     return QueryResponse(response=msg.content)
