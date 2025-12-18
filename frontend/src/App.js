@@ -3,7 +3,7 @@ import './App.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-// Detect weather condition from the bot's answer to drive background theme
+
 const detectWeatherTheme = (text) => {
   if (!text) return 'default';
   const lower = text.toLowerCase();
@@ -15,7 +15,7 @@ const detectWeatherTheme = (text) => {
   return 'default';
 };
 
-// Simple icon mapping for bot messages
+
 const getWeatherIcon = (text) => {
   if (!text) return '🌡️';
   const lower = text.toLowerCase();
@@ -107,14 +107,14 @@ function App() {
     setInput('');
   };
 
-  // Auto-scroll chat to bottom on new messages or when loading bubble appears
+  
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
   }, [messages, loading]);
 
-  // Simple derived chat history titles (for sidebar, static-style UI)
+
   const historyItems = useMemo(
     () =>
       messages
@@ -155,7 +155,7 @@ function App() {
           </div>
         </aside>
 
-        {/* Main chat area */}
+        {}
         <div className="chat-shell">
           <header className="chat-header-light">
             <div className="chat-header-title">
@@ -230,7 +230,7 @@ function App() {
                 </div>
               )}
 
-              {/* anchor to scroll into view */}
+              {}
               <div ref={messagesEndRef} />
             </div>
           </main>
