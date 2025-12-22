@@ -154,13 +154,5 @@ The frontend will be running on `http://localhost:3000`
 - **Langchain**: For agent orchestration
 - **Weather API**: OpenWeatherMap
 
-## Notes
 
-- Make sure both API keys are properly configured in the `.env` file
-- The backend uses CORS middleware to allow requests from the frontend
-- The agent is configured to use the weather tool when weather-related queries are detected
-
-## GitHub Repository
-
-After completion, the repository will be shared with view access to username: **pyaf**
 
